@@ -1,0 +1,26 @@
+[project]
+name = "polymat"
+version = "0.0.1"
+description = "Polymer material mechanics utilites"
+readme = "README.md"
+authors = [
+    { name = "Guille Giraldo", email = "guillegiraldo@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.3.4",
+    "scipy>=1.16.3",
+]
+
+[project.scripts]
+polymat = "polymat.scripts.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.0",
+    "ruff>=0.14.4",
+]
