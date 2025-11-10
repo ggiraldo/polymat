@@ -17,4 +17,4 @@ The code implementations are heavily inspired by the examples in [1].
 References
 ----------
 
-[1] Bergstrom, J., Mechanics of Solid Polymers, Elsevier, 2015 
+[1] J. Bergstrom, Mechanics of Solid Polymers, Elsevier, 2015
