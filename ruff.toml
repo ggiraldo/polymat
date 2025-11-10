@@ -1,0 +1,6 @@
+line-length = 120
+target-version = "py313"
+
+[lint]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
