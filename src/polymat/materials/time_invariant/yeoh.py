@@ -28,14 +28,19 @@ def Yeoh(F: Tensor, params: list[float]) -> Tensor:
 
     J: Scalar = det(F)
 
-    bstar: Tensor = J ** (-2 / 3) * dot(F, F.T)
+    bstar: Tensor = J ** (-2.0 / 3.0) * dot(F, F.T)
 
-    dev_bstar: Tensor = bstar - trace(bstar) / 3 * eye(3)
+    dev_bstar: Tensor = bstar - trace(bstar) / 3.0 * eye(3)
 
-    I1s: Scalar = trace(bstar)
+    I1star: Scalar = trace(bstar)
 
-    Stress: Tensor = 2 / J * (
-        C10 + 2 * C20 * (I1s - 3) + 3 * C30 * (I1s - 3) ** 2
-    ) * dev_bstar + kappa * (J - 1) * eye(3)
+    Stress_dev: Tensor = (
+        2.0
+        / J
+        * (C10 + 2.0 * C20 * (I1star - 3.0) + 3.0 * C30 * (I1star - 3) ** 2.0)
+        * dev_bstar
+    )
 
-    return Stress
+    Stress_vol: Tensor = kappa * (J - 1.0) * eye(3)
+
+    return Stress_dev + Stress_vol
