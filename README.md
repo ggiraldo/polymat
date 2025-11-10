@@ -12,3 +12,9 @@ Main Features:
 - Simulation of main deformation modes
 - Material parameter calibration from test data
 
+The code implementations are heavily inspired by the examples in [1].
+
+References
+----------
+
+[1] Bergstrom, J., Mechanics of Solid Polymers, Elsevier, 2015 
