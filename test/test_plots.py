@@ -3,7 +3,7 @@ import numpy as np
 
 from polymat.materials.time_invariant.eight_chain import EightChain
 from polymat.materials.time_invariant.yeoh import Yeoh
-from polymat.mechanics.deformation import uniaxial_tension
+from polymat.mechanics.elastic_deformation import uniaxial_tension
 from polymat.types import Vector
 
 

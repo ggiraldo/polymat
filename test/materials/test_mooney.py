@@ -1,7 +1,7 @@
 import numpy as np
 
 from polymat.materials.time_invariant.mooney import Mooney5
-from polymat.mechanics.deformation import uniaxial_tension
+from polymat.mechanics.elastic_deformation import uniaxial_tension
 from polymat.types import Tensor, Vector
 
 

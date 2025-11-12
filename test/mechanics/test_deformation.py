@@ -1,7 +1,7 @@
 from numpy import isclose, linspace
 
 from polymat.materials.time_invariant.yeoh import Yeoh
-from polymat.mechanics.deformation import uniaxial_tension
+from polymat.mechanics.elastic_deformation import uniaxial_tension
 from polymat.types import Vector
 
 
