@@ -1,5 +1,5 @@
-from numpy import diag, eye
-from numpy.linalg import det
+from numpy import diag, dot, eye, sqrt
+from numpy.linalg import det, eig, multi_dot
 
 from polymat.types import Tensor, Vector
 
@@ -30,25 +30,31 @@ def Ogden(F: Tensor, param: list[float]) -> Tensor:
 
     J: float = det(F)
 
-    lam: Vector = J ** (-1 / 3) * diag(F)
+    C = dot(F.T, F)
 
-    Stress: Tensor = kappa * (J - 1) * eye(3)
+    lam2, Q = eig(C)
+
+    lam: Vector = J ** (-1.0 / 3.0) * sqrt(lam2)
+
+    StressP: Tensor = kappa * (J - 1) * eye(3)
 
     for i in range(N):
-        a: float = (2 / J) * mu[i] / alpha[i]
+        fact: float = (2 / J) * mu[i] / alpha[i]
 
-        b: float = (lam[0] ** alpha[i] + lam[1] ** alpha[i] + lam[2] ** alpha[i]) / 3
+        p: float = (lam[0] ** alpha[i] + lam[1] ** alpha[i] + lam[2] ** alpha[i]) / 3
 
-        Stress[0, 0] += a * (lam[0] ** alpha[i] - b)
+        StressP[0, 0] += fact * (lam[0] ** alpha[i] - p)
 
-        Stress[1, 1] += a * (lam[1] ** alpha[i] - b)
+        StressP[1, 1] += fact * (lam[1] ** alpha[i] - p)
 
-        Stress[2, 2] += a * (lam[2] ** alpha[i] - b)
+        StressP[2, 2] += fact * (lam[2] ** alpha[i] - p)
+
+    Stress: Tensor = multi_dot((Q.T, StressP, Q))
 
     return Stress
 
 
-def Ogden_Marc(F, param):
+def Ogden_Marc(F: Tensor, params: list[float]) -> Tensor:
     """
     Marc version of Ogden hyperelastic material model.
 
@@ -67,10 +73,10 @@ def Ogden_Marc(F, param):
     Stress: Tensor
         Cauchy stress tensor.
     """
-    N: int = int((len(param) - 1) / 2)
-    mu: list[float] = param[0:N]
-    alpha: list[float] = param[N : 2 * N]
-    kappa: list[float] = param[-1]
+    N: int = int((len(params) - 1) / 2)
+    mu: list[float] = params[0:N]
+    alpha: list[float] = params[N : 2 * N]
+    kappa: float = params[-1]
 
     J: float = det(F)
 
