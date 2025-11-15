@@ -13,3 +13,7 @@ type Tensor = Annotated[ArrayLike, Literal[3, 3]]
 
 # Stress computation function signatures
 type ElasticModel = Callable[[Tensor, list[float]], Tensor]
+
+
+# Calibration helep function signatures
+type ErrorMeasure = Callable[[Vector, Vector], float]
