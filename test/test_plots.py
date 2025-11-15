@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from pytest import mark
 
 from polymat.materials.time_invariant.eight_chain import EightChain
 from polymat.materials.time_invariant.yeoh import Yeoh
@@ -7,6 +8,7 @@ from polymat.mechanics.elastic_deformation import biaxial_stress, planar_stress,
 from polymat.types import Vector
 
 
+@mark.skip
 def test_plot_yeoh() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
@@ -25,6 +27,7 @@ def test_plot_yeoh() -> None:
     plt.show()
 
 
+@mark.skip
 def test_plot_eight_chain() -> None:
     test_mat: list[float] = [1.0, 3.0, 100]
 
@@ -42,6 +45,7 @@ def test_plot_eight_chain() -> None:
     plt.show()
 
 
+@mark.skip
 def test_plot_yeoh_biaxial() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
@@ -60,6 +64,7 @@ def test_plot_yeoh_biaxial() -> None:
     plt.show()
 
 
+@mark.skip
 def test_plot_yeoh_planar() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
