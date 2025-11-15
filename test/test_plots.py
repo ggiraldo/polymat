@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from pytest import mark
 
 from polymat.materials.time_invariant.eight_chain import EightChain
 from polymat.materials.time_invariant.yeoh import Yeoh
@@ -8,8 +7,7 @@ from polymat.mechanics.elastic_deformation import biaxial_stress, planar_stress,
 from polymat.types import Vector
 
 
-@mark.skip
-def test_plot_yeoh() -> None:
+def test_plot_yeoh_uniaxial() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
     trueStrain: Vector = np.linspace(0.0, 0.8, 100)
@@ -27,25 +25,6 @@ def test_plot_yeoh() -> None:
     plt.show()
 
 
-@mark.skip
-def test_plot_eight_chain() -> None:
-    test_mat: list[float] = [1.0, 3.0, 100]
-
-    trueStrain: Vector = np.linspace(0.0, 0.8, 100)
-
-    trueStress: Vector = uniaxial_stress(EightChain, trueStrain, test_mat)
-
-    plt.figure()
-
-    plt.plot(trueStrain, trueStress)
-    plt.title("Arruda-Boyce EC model")
-    plt.xlabel("True Strain")
-    plt.ylabel("True Stress")
-    plt.grid(True, which="both", alpha=0.4)
-    plt.show()
-
-
-@mark.skip
 def test_plot_yeoh_biaxial() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
@@ -64,7 +43,6 @@ def test_plot_yeoh_biaxial() -> None:
     plt.show()
 
 
-@mark.skip
 def test_plot_yeoh_planar() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100]
 
@@ -80,4 +58,21 @@ def test_plot_yeoh_planar() -> None:
     plt.ylabel("True Stress")
     plt.grid(True, which="both", alpha=0.4)
 
+    plt.show()
+
+
+def test_plot_eight_chain() -> None:
+    test_mat: list[float] = [1.0, 3.0, 100]
+
+    trueStrain: Vector = np.linspace(0.0, 0.8, 100)
+
+    trueStress: Vector = uniaxial_stress(EightChain, trueStrain, test_mat)
+
+    plt.figure()
+
+    plt.plot(trueStrain, trueStress)
+    plt.title("Arruda-Boyce EC model")
+    plt.xlabel("True Strain")
+    plt.ylabel("True Stress")
+    plt.grid(True, which="both", alpha=0.4)
     plt.show()

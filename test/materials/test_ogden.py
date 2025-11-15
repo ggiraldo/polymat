@@ -1,6 +1,6 @@
 import numpy as np
 
-from polymat.materials.time_invariant.ogden import Ogden, Ogden_Marc
+from polymat.materials.time_invariant.ogden import Ogden, Ogden2
 from polymat.mechanics.elastic_deformation import uniaxial_stress
 from polymat.types import Tensor, Vector
 
@@ -30,6 +30,6 @@ def test_ogden_marc_zero_strain() -> None:
 
     F: Tensor = np.eye(3)
 
-    Stress: Tensor = Ogden_Marc(F, test_mat)
+    Stress: Tensor = Ogden2(F, test_mat)
 
     assert np.isclose(Stress[0, 0], 0.0)
