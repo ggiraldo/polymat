@@ -37,8 +37,13 @@ def fitness_single_test_elastic(
     fitness: float
         Target value for minimization algorithm
     """
-    predictedStress: Vector = deformation_mode(elastic_model, strain, params)
+    # Assuming that the first point is very close to zero
+    # let's ignore it.
+    _strain = strain[1:]
+    _stress = stress[1:]
 
-    err: float = error_measure(stress, predictedStress)
+    predictedStress: Vector = deformation_mode(elastic_model, _strain, params)
+
+    err: float = error_measure(_stress, predictedStress)
 
     return err
