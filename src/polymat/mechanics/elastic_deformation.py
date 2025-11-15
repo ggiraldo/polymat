@@ -38,6 +38,7 @@ def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]
         opt: OptimizeResult = minimize(
             fun=S22abs,
             x0=1 / sqrt(lam1),
+            method="Nelder-Mead",
             tol=1e-9,
         )
 
