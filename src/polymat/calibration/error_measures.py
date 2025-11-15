@@ -1,4 +1,4 @@
-from numpy import max, mean, sqrt
+from numpy import abs, maximum, mean, sqrt
 
 from polymat.types import Vector
 
@@ -48,3 +48,28 @@ def error_rms(x: Vector, p: Vector) -> float:
     geom_mean: float = sqrt(mean(x**2))
 
     return 100.0 * rms / geom_mean
+
+
+def error_re(x: Vector, p: Vector) -> float:
+    """
+    Normalized Relative Error (RE) measure
+
+    Parameters
+    ----------
+    x: Vector
+        eXperimental data vector
+
+    p: Vector
+        Predicted data vector
+
+    Returns
+    -------
+    error: float
+        Computed RE error
+    """
+    abs_res: Vector = abs(x - p)
+    max_abs: Vector = maximum(abs(x), abs(p))
+    rel_err: Vector = abs_res / max_abs
+    mean_re: float = mean(rel_err)
+
+    return 100.0 * mean_re
