@@ -4,7 +4,7 @@ from scipy.optimize import OptimizeResult, minimize
 from polymat.types import ElasticModel, Scalar, Tensor, Vector
 
 
-def uniaxial_tension(model: ElasticModel, trueStrain: Vector, params: list[float]) -> Vector:
+def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]) -> Vector:
     """
     Compresssible uniaxial loading.
 

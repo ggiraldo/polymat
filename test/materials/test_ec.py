@@ -14,7 +14,7 @@ def test_ec_zero_strain() -> None:
     assert np.isclose(Stress[0, 0], 0.0)
 
 
-def test_ec_uniaxial_tension() -> None:
+def test_ec_uniaxial_stress() -> None:
     test_mat: list[float] = [1.0, 3.0, 100.0]
 
     lam1: float = np.exp(0.8)

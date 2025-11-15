@@ -14,7 +14,7 @@ def test_yeoh_zero_strain() -> None:
     assert np.isclose(Stress[0, 0], 0.0)
 
 
-def test_yeoh_uniaxial_tension() -> None:
+def test_yeoh_uniaxial_stress() -> None:
     test_mat: list[float] = [1.0, -0.01, 1e-4, 100.0]
 
     lam1: float = np.exp(1.0)
