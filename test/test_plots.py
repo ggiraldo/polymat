@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+from polymat.calibration.solvers.single_test import fit_single_test_elastic
 from polymat.materials.time_invariant.eight_chain import EightChain
 from polymat.materials.time_invariant.yeoh import Yeoh
 from polymat.mechanics.elastic_deformation import biaxial_stress, planar_stress, uniaxial_stress
+from polymat.mechanics.incompressible_deformation import uniaxial_stress_incompressible
 from polymat.types import Vector
 
 
@@ -75,4 +77,37 @@ def test_plot_eight_chain() -> None:
     plt.xlabel("True Strain")
     plt.ylabel("True Stress")
     plt.grid(True, which="both", alpha=0.4)
+    plt.show()
+
+
+def test_fit_plot() -> None:
+    test_material: list[float] = [0.5, -0.1, 1e-4]
+
+    trueStrain: Vector = np.linspace(0.0, 0.5, 20)
+    trueStress: Vector = uniaxial_stress_incompressible(Yeoh, trueStrain, test_material)
+
+    calibrated_params, calibration_error = fit_single_test_elastic(
+        strain=trueStrain,
+        stress=trueStress,
+        elastic_model=Yeoh,
+        deformation_mode=uniaxial_stress_incompressible,
+        lower_bound=[-1e4, -1e2, -1.0],
+        upper_bound=[1e4, 1e2, 1.0],
+    )
+
+    predictedStress: Vector = uniaxial_stress_incompressible(Yeoh, trueStrain, calibrated_params)
+
+    np.set_printoptions(precision=4)
+
+    plt.figure()
+
+    plt.plot(trueStrain, trueStress, "go", label="Test")
+    plt.plot(trueStrain, predictedStress, "r", label="Prediction")
+    plt.title("Yeoh model")
+    plt.xlabel("True Strain")
+    plt.ylabel("True Stress")
+    plt.grid(True, which="both", alpha=0.4)
+    plt.text(0.2, 0.0, f"Params: {calibrated_params} \nError: {calibration_error:.1f}%")
+    plt.legend()
+
     plt.show()
