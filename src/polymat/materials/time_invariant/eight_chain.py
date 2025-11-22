@@ -1,7 +1,7 @@
 from numpy import dot, eye, sign, spacing, sqrt, tan, trace
 from numpy.linalg import det
 
-from polymat.types import Scalar, Tensor
+from polymat.types import Scalar, Tensor, Vector
 
 
 def invLangevin(x: float) -> float:
@@ -34,7 +34,7 @@ def invLangevin(x: float) -> float:
     return 1.0 / (sign(x) - x)
 
 
-def EightChain(F: Tensor, params: list[float]) -> Tensor:
+def EightChain(F: Tensor, params: Vector) -> Tensor:
     """
     Arruda-Boyce Eight-Chain hyperelastic material model.
 
@@ -45,7 +45,7 @@ def EightChain(F: Tensor, params: list[float]) -> Tensor:
     F : Tensor
         Deformation gradient tensor as np.ndarray of size (3x3)
 
-    params : list[float]
+    params : Vector
         Material parameters [mu, lambdaL, kappa]
 
     Returns

@@ -6,7 +6,7 @@ from numpy.typing import ArrayLike
 # Mechanical quantity arrays
 type Scalar = np.float64
 
-type Vector = Annotated[ArrayLike, Literal["n"]]
+type Vector = Annotated[ArrayLike, Literal["n"]] | list[float]
 
 type Tensor = Annotated[ArrayLike, Literal[3, 3]]
 

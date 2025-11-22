@@ -4,7 +4,7 @@ from scipy.optimize import OptimizeResult, minimize
 from polymat.types import ElasticModel, Scalar, Tensor, Vector
 
 
-def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]) -> Vector:
+def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: Vector) -> Vector:
     """
     Compresssible uniaxial loading.
 
@@ -16,7 +16,7 @@ def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]
     trueStrain : Vector
         Uniaxial true strain history
 
-    params : list[float]
+    params : Vector
         Material parameters to be passed to model
 
     Returns
@@ -51,7 +51,7 @@ def uniaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]
     return stress
 
 
-def biaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float]) -> Vector:
+def biaxial_stress(model: ElasticModel, trueStrain: Vector, params: Vector) -> Vector:
     """
     Compresssible equi-biaxial loading.
 
@@ -63,7 +63,7 @@ def biaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float])
     trueStrain : Vector
         Principal true strain history
 
-    params : list[float]
+    params : Vector
         Material parameters to be passed to model
 
     Returns
@@ -98,7 +98,7 @@ def biaxial_stress(model: ElasticModel, trueStrain: Vector, params: list[float])
     return stress
 
 
-def planar_stress(model: ElasticModel, trueStrain: Vector, params: list[float]) -> Vector:
+def planar_stress(model: ElasticModel, trueStrain: Vector, params: Vector) -> Vector:
     """
     Compresssible planar loading (pure shear).
 
@@ -110,7 +110,7 @@ def planar_stress(model: ElasticModel, trueStrain: Vector, params: list[float]) 
     trueStrain : Vector
         Principal true strain history
 
-    params : list[float]
+    params : Vector
         Material parameters to be passed to model
 
     Returns

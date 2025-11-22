@@ -1,10 +1,10 @@
 from numpy import dot, eye, trace
 from numpy.linalg import det
 
-from polymat.types import Tensor
+from polymat.types import Tensor, Vector
 
 
-def Mooney5(F: Tensor, params: list[float]) -> Tensor:
+def Mooney5(F: Tensor, params: Vector) -> Tensor:
     """
     Mooney 5-terms polynomial hyperelastic material model.
 
@@ -15,7 +15,7 @@ def Mooney5(F: Tensor, params: list[float]) -> Tensor:
     F: Tensor
         Deformation gradient tensor as array of size (3x3)
 
-    params: list[float]
+    params: Vector
         Material parameters [C10, C02, C11, C20, C30, kappa]
 
     Returns

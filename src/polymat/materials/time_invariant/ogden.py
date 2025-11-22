@@ -4,7 +4,7 @@ from numpy.linalg import det, eig, multi_dot
 from polymat.types import Tensor, Vector
 
 
-def Ogden(F: Tensor, param: list[float]) -> Tensor:
+def Ogden(F: Tensor, param: Vector) -> Tensor:
     """
     Ogden hyperelastic material model.
 
@@ -15,7 +15,7 @@ def Ogden(F: Tensor, param: list[float]) -> Tensor:
     F: Tensor
         Deformation gradient tensor of shape (3,3)
 
-    params: list[float]
+    params: Vector
         Material parameters [mu1, m2, ..., alpha1, alpha2, ..., kappa]
 
     Returns
@@ -24,8 +24,8 @@ def Ogden(F: Tensor, param: list[float]) -> Tensor:
         Cauchy stress tensor.
     """
     N: int = int((len(param) - 1) / 2)
-    mu: list[float] = param[0:N]
-    alpha: list[float] = param[N : 2 * N]
+    mu: Vector = param[0:N]
+    alpha: Vector = param[N : 2 * N]
     kappa: float = param[-1]
 
     J: float = det(F)
@@ -54,7 +54,7 @@ def Ogden(F: Tensor, param: list[float]) -> Tensor:
     return Stress
 
 
-def Ogden2(F: Tensor, params: list[float]) -> Tensor:
+def Ogden2(F: Tensor, params: Vector) -> Tensor:
     """
     Alternative version of Ogden hyperelastic material model (Ansys, Marc).
 
@@ -65,7 +65,7 @@ def Ogden2(F: Tensor, params: list[float]) -> Tensor:
     F: Tensor
         Deformation gradient tensor of shape (3,3)
 
-    params: list[float]
+    params: Vector
         Material parameters [mu1, mu2, ..., alpha1, alpha2, ..., kappa]
 
     Returns
@@ -74,8 +74,8 @@ def Ogden2(F: Tensor, params: list[float]) -> Tensor:
         Cauchy stress tensor.
     """
     N: int = int((len(params) - 1) / 2)
-    mu: list[float] = params[0:N]
-    alpha: list[float] = params[N : 2 * N]
+    mu: Vector = params[0:N]
+    alpha: Vector = params[N : 2 * N]
     kappa: float = params[-1]
 
     J: float = det(F)

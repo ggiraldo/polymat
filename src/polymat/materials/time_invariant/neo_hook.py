@@ -1,10 +1,10 @@
 from numpy import dot, eye, trace
 from numpy.linalg import det
 
-from polymat.types import Tensor
+from polymat.types import Tensor, Vector
 
 
-def NeoHook(F: Tensor, params: list[float]) -> Tensor:
+def NeoHook(F: Tensor, params: Vector) -> Tensor:
     """
     Neo-Hookean hyperelastic material model.
 
@@ -15,7 +15,7 @@ def NeoHook(F: Tensor, params: list[float]) -> Tensor:
     F: Tensor
         Deformation gradient tensor of shape (3,3)
 
-    params: list[float]
+    params: Vector
         Material parameters [mu, kappa]
 
     Returns
