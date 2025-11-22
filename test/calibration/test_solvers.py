@@ -1,7 +1,7 @@
 from numpy import isclose, linspace
 from pytest import mark
 
-from polymat.calibration.solvers import fit_single_test_elastic, fit_single_test_incompressible
+from polymat.calibration.solvers.single_test import fit_single_test_elastic, fit_single_test_incompressible
 from polymat.materials.time_invariant.yeoh import Yeoh
 from polymat.mechanics.elastic_deformation import uniaxial_stress
 from polymat.mechanics.incompressible_deformation import uniaxial_stress_incompressible

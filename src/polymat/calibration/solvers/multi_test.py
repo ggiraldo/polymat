@@ -5,7 +5,7 @@ from polymat.calibration.fitness_functions import fitness_single_test_elastic
 from polymat.types import ElasticDeformation, ElasticModel, Vector
 
 
-def fit_single_test_elastic(
+def fit_multi_test_elastic(
     strain: Vector,
     stress: Vector,
     elastic_model: ElasticModel,
@@ -17,7 +17,9 @@ def fit_single_test_elastic(
     nonlinear_constraint: NonlinearConstraint | None = None,
 ) -> tuple[Vector, float]:
     """
-    Solves optimization problem to calibrate the material model against the test data using simplex algorithm.
+    Solves optimization problem to calibrate the material model against the test data.
+
+    Uses differential evolution search.
 
     Parameters
     ----------
@@ -84,7 +86,7 @@ def fit_single_test_elastic(
     return calibration_params, calibration_error
 
 
-def fit_single_test_incompressible(
+def fit_multi_test_incompressible(
     strain: Vector,
     stress: Vector,
     elastic_model: ElasticModel,
@@ -96,7 +98,9 @@ def fit_single_test_incompressible(
     nonlinear_constraint: NonlinearConstraint | None = None,
 ) -> tuple[Vector, float]:
     """
-    Solves optimization problem to calibrate the material model against the test data using simplex algorithm.
+    Solves optimization problem to calibrate the material model against the test data.
+
+    Uses differential evolution search.
 
     Assumes incompressibility, thus the bulk modulus is not included.
 
