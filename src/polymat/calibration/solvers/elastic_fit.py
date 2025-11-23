@@ -1,7 +1,7 @@
 from scipy.optimize import Bounds, LinearConstraint, NonlinearConstraint, OptimizeResult, differential_evolution
 
 from polymat.calibration.error_measures import error_re
-from polymat.calibration.fitness_functions import fitness_single_test_elastic
+from polymat.calibration.fitness_functions import fitness_elastic
 from polymat.types import ElasticDeformation, ElasticModel, Vector
 
 SEARCH_TOL = 1e-9
@@ -9,11 +9,11 @@ SEARCH_MAX_ITER = 500
 SEARCH_POP_SIZE = 20
 
 
-def fit_single_test_elastic(
-    strain: Vector,
-    stress: Vector,
+def fit_elastic_material(
+    strain: list[Vector],
+    stress: list[Vector],
     elastic_model: ElasticModel,
-    deformation_mode: ElasticDeformation,
+    deformation_mode: list[ElasticDeformation],
     lower_bound: Vector,
     upper_bound: Vector,
     linear_constraint: LinearConstraint | None = None,
@@ -26,17 +26,17 @@ def fit_single_test_elastic(
 
     Parameters
     ----------
-    strain: Vector
-        Experimental true strain curve
+    strain: list[Vector]
+        List of experimental true strain curves
 
-    stress: Vector
-        Experimental true stress curve
+    stress: list[Vector]
+        List of experimental true stress curves
 
     elastic_model: ElasticModel
         Hyperelastic material model from polymat.materials
 
-    deformation_mode: ElasticDeformation
-        Stress computation function from polymat.mechanics.elastic_deformation
+    deformation_mode: list[ElasticDeformation]
+        List of corresponding stress computation function from polymat.mechanics.elastic_deformation
 
     lower_bound: Vector | None = None
         Lower bound for the search space
@@ -69,7 +69,7 @@ def fit_single_test_elastic(
     bounds: Bounds = Bounds(lower_bound, upper_bound)
 
     opt: OptimizeResult = differential_evolution(
-        func=fitness_single_test_elastic,
+        func=fitness_elastic,
         bounds=bounds,
         args=(strain, stress, elastic_model, deformation_mode, error_re),
         constraints=constraints,
